@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="closure"></div>
+    <div class="div-casio-cover">
+        <img id="casio-cover" src="imgs/calc_cover.png" alt="">
+    </div>
+    <button id="on" class="onoffbtn" onclick="turnOn()">On</button>
+    <button id="off" class="onoffbtn" onclick="turnOff()">Off</button>
+    <section>
+        <div class="container">
+            <h2>Calculator</h2>
+            <div class="calc" id="calc">
+                <input type="text" id="screen" dir="ltr" readonly>
+                <div class="table">
+                    <div>
+                        <button class="active" onclick="enterChar('%')">%</button>
+                        <button class="active" onclick="enterChar('(')">(</button>
+                        <button class="active" onclick="enterChar(')')">)</button>
+                        <button class="active" onclick="enterNum('π')">π</button>
+                        <button class="active" onclick="enterChar('!')">!</button>
+                    </div>
+                    <div>
+                        <button onclick="enterNum(7)">7</button>
+                        <button onclick="enterNum(8)">8</button>
+                        <button onclick="enterNum(9)">9</button>
+                        <button onclick="dElEtE()">DEL</button>
+                        <button onclick="clearScreen()">AC</button>
+                    </div>
+                    <div>
+                        <button onclick="enterNum(4)">4</button>
+                        <button onclick="enterNum(5)">5</button>
+                        <button onclick="enterNum(6)">6</button>
+                        <button onclick="enterOperator('*')">x</button>
+                        <button onclick="enterOperator('/')">÷</button>
+                    </div>
+                    <div>
+                        <button onclick="enterNum(1)">1</button>
+                        <button onclick="enterNum(2)">2</button>
+                        <button onclick="enterNum(3)">3</button>
+                        <button onclick="enterOperator('+')">+</button>
+                        <button onclick="enterOperator('-')">-</button>
+                    </div>
+                    <div>
+                        <button onclick="enterNum(0)">0</button>
+                        <button onclick="enterChar('.')">.</button>
+                        <button onclick="enterOperator('^')">^</button>
+                        <button onclick="getAns()">Ans</button>
+                        <button class="equal" onclick="calculate()">=</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <script src="main.js"></script>
+</body>
+</html>
