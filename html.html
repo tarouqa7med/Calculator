@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Calculator</title>
+<style>
+    body { display:flex; justify-content:center; align-items:center; height:100vh; background:#2b2b2b; font-family:sans-serif; }
+    .calculator { background:#3a3a4a; padding:20px; border-radius:15px; box-shadow:0 0 20px #000; }
+    .display { width:240px; height:50px; font-size:24px; margin-bottom:10px; text-align:right; padding:5px; border-radius:5px; border:none; }
+    .buttons { display:grid; grid-template-columns:repeat(6, 40px); grid-gap:5px; }
+    button { width:40px; height:40px; font-size:18px; border-radius:50%; border:none; cursor:pointer; }
+    .equal { background:orange; color:white; grid-column:span 2; }
+</style>
+</head>
+<body>
+<div class="calculator">
+    <input type="text" class="display" id="display" value="0" disabled>
+    <div class="buttons">
+        <button data-value="%">%</button>
+        <button data-value="(">(</button>
+        <button data-value=")">)</button>
+        <button data-value="pi">π</button>
+        <button data-value="!">!</button>
+        <button data-value="7">7</button>
+        <button data-value="8">8</button>
+        <button data-value="9">9</button>
+        <button data-value="DEL">DEL</button>
+        <button data-value="AC">AC</button>
+        <button data-value="4">4</button>
+        <button data-value="5">5</button>
+        <button data-value="6">6</button>
+        <button data-value="*">x</button>
+        <button data-value="/">÷</button>
+        <button data-value="1">1</button>
+        <button data-value="2">2</button>
+        <button data-value="3">3</button>
+        <button data-value="+">+</button>
+        <button data-value="-">-</button>
+        <button data-value="0">0</button>
+        <button data-value=".">.</button>
+        <button data-value="^">^</button>
+        <button data-value="Ans">Ans</button>
+        <button data-value="=" class="equal">=</button>
+    </div>
+</div>
+
+<script>
+let display=document.getElementById('display');
+let current='0';
+let lastAns='0';
+let stack=[];
+
+function updateDisplay() { display.value=current; }
+
+function factorial(n) { if(n<0) return NaN; let f=1; for(let i=2;i<=n;i++) f*=i; return f; }
+
+document.querySelectorAll('button').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+        let val=btn.getAttribute('data-value');
+        if(val==='AC'){ current='0'; stack=[]; updateDisplay(); return; }
+        if(val==='DEL'){ current=current.slice(0,-1)||'0'; updateDisplay(); return; }
+        if(val==='Ans'){ current+=lastAns; updateDisplay(); return; }
+        if(val==='pi'){ current+='3.14'; updateDisplay(); return; }
+        if(val==='!'){ let n=parseInt(eval(current)); current=factorial(n).toString(); updateDisplay(); return; }
+        if(val==='='){ try{ let res=eval(current.replace(/÷/g,'/').replace(/x/g,'*').replace(/\^/g,'**')); current=res.toString(); lastAns=current; updateDisplay(); } catch(e){ current='Error'; updateDisplay(); } return; }
+        current=(current==='0')?val:current+val;
+        updateDisplay();
+    });
+});
+</script>
+</body>
+</html>
